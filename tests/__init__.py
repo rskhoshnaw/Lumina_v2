@@ -1,1 +1,1 @@
-
+"""Lumina Studio test suite."""
