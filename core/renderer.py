@@ -42,7 +42,7 @@ class ManimRenderer:
             "GeneratedVideo",
         ]
 
-        return subprocess.run(
+        result = subprocess.run(
             command,
             cwd=str(self.base_dir),
             capture_output=True,
@@ -50,6 +50,12 @@ class ManimRenderer:
             encoding="utf-8",
             errors="replace",
         )
+        
+        # مهم: اگر Manim خطا داد، مستقیماً آن را پرتاب می‌کنیم تا در UI نمایش داده شود
+        if result.returncode != 0:
+            raise RuntimeError(f"Manim Rendering Failed:\n{result.stderr}")
+            
+        return result
 
     def find_video(self, scene_file_stem: Optional[str] = None) -> Optional[Path]:
 
@@ -69,5 +75,4 @@ class ManimRenderer:
             key=lambda path: path.stat().st_mtime,
             reverse=True,
         )
-
         return candidates[0]
