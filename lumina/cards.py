@@ -5,16 +5,12 @@ from __future__ import annotations
 from typing import Any
 
 from manim import (
-    BLUE,
     DOWN,
     GOLD,
-    GREEN,
     LEFT,
     MathTex,
-    Rectangle,
     RIGHT,
     RoundedRectangle,
-    Text,
     UP,
     VGroup,
     WHITE,
@@ -29,8 +25,7 @@ class QuoteCard(VGroup):
     """
     Visual quote card.
 
-    Public API is intentionally compatible with the current
-    Lumina code generator:
+    Public API:
 
         QuoteCard(
             text_content,
@@ -120,20 +115,22 @@ class QuoteCard(VGroup):
 
             self.author_text.shift(LEFT * 0.55)
 
-        parts = [self.background, self.quote]
+        components = [
+            self.background,
+            self.quote,
+        ]
 
         if self.author_text is not None:
-            parts.append(self.author_text)
+            components.append(self.author_text)
 
-        self.add(*parts)
+        self.add(*components)
 
 
 class FormulaHighlightCard(VGroup):
     """
     Visual formula card.
 
-    Public API is intentionally compatible with the current
-    Lumina code generator:
+    Public API:
 
         FormulaHighlightCard(
             latex_str,
@@ -161,6 +158,7 @@ class FormulaHighlightCard(VGroup):
 
         card_width = float(kwargs.pop("card_width", 10.8))
         card_height = float(kwargs.pop("card_height", 4.8))
+
         border_color = kwargs.pop(
             "border_color",
             DEFAULT_COLORS.secondary,
@@ -230,4 +228,3 @@ class FormulaHighlightCard(VGroup):
                 self.background,
                 self.formula,
             )
-
