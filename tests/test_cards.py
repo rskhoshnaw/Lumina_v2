@@ -65,3 +65,4 @@ def test_empty_formula_is_rejected():
         pass
     else:
         raise AssertionError("Empty formula must raise ValueError.")
+        
